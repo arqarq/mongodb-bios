@@ -13,10 +13,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class InsertBiosDocuments {
-
-
     public static void main(String[] args) throws IOException {
-        try(MongoClient client = Utils.connect()) {
+        try (MongoClient client = Utils.connect()) {
             MongoDatabase db = client.getDatabase("bios");
             MongoCollection<Document> products = db.getCollection("bios");
             products.createIndex(Indexes.compoundIndex(
