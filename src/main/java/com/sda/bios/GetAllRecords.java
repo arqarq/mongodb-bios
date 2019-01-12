@@ -8,7 +8,6 @@ import org.bson.Document;
 import java.util.function.Consumer;
 
 public class GetAllRecords {
-
     public static void main(String[] args) {
         try (MongoClient client = Utils.connect()) {
             MongoDatabase db = client.getDatabase("bios");
