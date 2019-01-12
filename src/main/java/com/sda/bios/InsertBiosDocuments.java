@@ -14,13 +14,17 @@ import java.util.List;
 
 public class InsertBiosDocuments {
     public static void main(String[] args) throws IOException {
-        try (MongoClient client = Utils.connect()) {
+        try (MongoClient client = Utils.connect()
+        ) {
             MongoDatabase db = client.getDatabase("bios");
+//            db.drop();
             MongoCollection<Document> products = db.getCollection("bios");
             products.createIndex(Indexes.compoundIndex(
                     Indexes.text("name"),
                     Indexes.text("awards")));
-            String data = new String(Files.readAllBytes(Paths.get("./src/main/resources/data.json")), StandardCharsets.UTF_8);
+            String data = new String(Files.readAllBytes(
+                    Paths.get("./src/main/resources/data.json")),
+                    StandardCharsets.UTF_8);
             products.insertMany((List<Document>) Document.parse("{\"json\":" + data + "}").get("json"));
         }
     }
